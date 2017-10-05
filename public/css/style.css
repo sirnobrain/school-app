@@ -1,0 +1,28 @@
+body {
+	font-family: helvetica;
+}
+
+table {
+	border-collapse: separate;
+	border-spacing: 8px;
+	text-align: left;
+	min-width: 45%;
+}
+
+th {
+	font-weight: 100;
+}
+
+td {
+	border: 1px solid #222;
+	border-radius: 2px;
+	padding: 6px 18px;
+}
+
+th:last-child {
+	text-align: center;
+}
+
+div {
+	padding: 32px 32px;
+}

@@ -1,0 +1,35 @@
+<%- include('templates/header.ejs') %>
+
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Full Name</th>
+				<th>Email</th>
+				<th>Options</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%students.forEach(student => {%>
+			<tr>
+				<td><%=student.id%></td>
+				<td><%=student.first_name%></td>
+				<td><%=student.last_name%></td>
+				<td><%=student.getFullName()%></td>
+				<td><%=student.email%></td>
+				<td>
+					<a href = "/students/edit/<%=student.id%>">edit</a>
+					<a href = "/students/delete/<%=student.id%>">delete</a>
+				</td>
+			</tr>
+			<%})%>
+		</tbody>
+	</table>
+</div>
+<div>
+	<a href="/students/add">ADD STUDENT</a>
+</div>
+<%- include('templates/footer.ejs') %>

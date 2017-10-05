@@ -1,0 +1,21 @@
+<%- include('templates/header.ejs') %>
+
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Subject Name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%subjects.forEach(subject => {%>
+			<tr>
+				<td><%= subject.id %></td>
+				<td><%= subject.subject_name %></td>
+			</tr>
+			<%})%>
+		</tbody>
+	</table>
+</div>
+<%- include('templates/footer.ejs') %>

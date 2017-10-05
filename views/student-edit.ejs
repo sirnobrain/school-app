@@ -1,0 +1,20 @@
+<%- include('templates/header.ejs') %>
+<div>
+	<form action = "/students/edit/<%= student.id %>" method = "POST">
+		First Name:
+		<br>
+		<input type = "text" name = "first_name" value = "<%=student.first_name%>" autofocus required>
+		<br>
+		Last Name:
+		<br>
+		<input type = "text" name = "last_name" value = "<%=student.last_name%>" required>
+		<br>
+		Email:
+		<br>
+		<input type = "text" name = "email" value = "<%=student.email%>" required>
+		<br>
+		<br>
+		<input type = "submit" value = "Add Student">
+	</form>
+</div>
+<%- include('templates/footer.ejs') %>

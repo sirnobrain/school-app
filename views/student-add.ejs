@@ -1,0 +1,27 @@
+<%- include('templates/header.ejs') %>
+
+<div>
+	<%
+	if (hasOwnProperty('err')) {
+	err.errors.forEach(error => {
+	%>
+		<h1><%= error.message %></h1>
+	<%})}%>
+	<form action = "/students/add" method = "POST">
+		First Name:
+		<br>
+		<input type = "text" name = "first_name" autofocus required>
+		<br>
+		Last Name:
+		<br>
+		<input type = "text" name = "last_name" required>
+		<br>
+		Email:
+		<br>
+		<input type = "text" name = "email" required>
+		<br>
+		<br>
+		<input type = "submit" value = "Add Student">
+	</form>
+</div>
+<%- include('templates/footer.ejs') %>
