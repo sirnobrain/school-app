@@ -6,6 +6,8 @@
 			<tr>
 				<th>Id</th>
 				<th>Subject Name</th>
+				<th>Teacher(s)</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -13,6 +15,18 @@
 			<tr>
 				<td><%= subject.id %></td>
 				<td><%= subject.subject_name %></td>
+				<td>
+					<ol>
+					<%if (subject.Teachers) {
+						subject.Teachers.forEach(teacher => { %>
+							<li><%= teacher.getFullName() %></li>
+						<%});
+					}%>
+					</ol>
+				</td>
+				<td>
+					<a href="/subjects/<%= subject.id %>/enrolledstudents">Enrolled Student(s)</a>
+				</td>
 			</tr>
 			<%})%>
 		</tbody>

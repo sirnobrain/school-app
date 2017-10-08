@@ -1,0 +1,17 @@
+<%- include('templates/header.ejs') %>
+
+<div>
+	<form action = "/subjects/<%= studentSubject.id %>/givescore" method = "POST">
+		Student: <%= studentSubject.Student.getFullName() %>
+		<br>
+		Subject: <%= studentSubject.Subject.subject_name %>
+		<br>
+		Score: 
+		<input type = "text" name = "score" required>
+		<input type = "hidden" name = "subject_id" value = "<%= studentSubject.Subject.id %>">
+		<br>
+		<br>
+		<input type = "submit" value = "Give Score">
+	</form>
+</div>
+<%- include('templates/footer.ejs') %>

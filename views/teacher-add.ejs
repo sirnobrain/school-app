@@ -4,10 +4,10 @@
 	<%
 	if (hasOwnProperty('err')) {
 	err.errors.forEach(error => {
-	%>
+	%>	
 		<h1><%= error.message %></h1>
 	<%})}%>
-	<form action = "/students/add" method = "POST">
+	<form action = "/teachers/add" method = "POST">
 		First Name:
 		<br>
 		<input type = "text" name = "first_name" autofocus required>
@@ -20,8 +20,14 @@
 		<br>
 		<input type = "text" name = "email" required>
 		<br>
+		<select name = "SubjectId">
+			<%subjects.forEach(subject => {%>
+			<option value = "<%=subject.id%>"><%= subject.subject_name%></option>
+			<%})%>
+		</select>
 		<br>
-		<input type = "submit" value = "Add Students">
+		<br>
+		<input type = "submit" value = "Add Teacher">
 	</form>
 </div>
 <%- include('templates/footer.ejs') %>

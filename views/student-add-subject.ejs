@@ -1,0 +1,34 @@
+<%- include('templates/header.ejs') %>
+
+<div>
+	<table>
+		<tbody>
+			<tr>
+				<td>ID</td>
+				<td><%=data.student.id%></td>
+			</tr>
+			<tr>
+				<td>Name</td>
+				<td><%=data.student.getFullName()%></td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td><%=data.student.email%></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div>
+	<form action = "/students/<%=data.student.id%>/addsubject" method = "POST">
+		<select name = "SubjectId">
+			<%data.subjects.forEach(subject => {%>
+			<option value = "<%=subject.id%>"><%= subject.subject_name%></option>
+			<%})%>
+		</select>
+		<br>
+		<br>
+		<input type = "submit" value = "Add Subject">
+	</form>
+</div>
+
+<%- include('templates/footer.ejs') %>

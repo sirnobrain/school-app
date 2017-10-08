@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const model = require('./../models');
+const models = require('./../models');
 
 router.get('/', (req, res) => {
-	model.Student.findAll({order: [['id', 'asc']]})
+	models.Student.findAll({order: [['id', 'asc']]})
 	.then(students => {
 		res.render('students', {students});
+	})
+	.catch(err => {
+		if (err) throw err;
 	})
 });
 
@@ -14,7 +17,7 @@ router.get('/add', (req, res) => {
 });
 
 router.post('/add', (req, res) => {
-	model.Student.create({
+	models.Student.create({
 		first_name: req.body.first_name, 
 		last_name: req.body.last_name, 
 		email: req.body.email,
@@ -30,9 +33,12 @@ router.post('/add', (req, res) => {
 });
 
 router.get('/edit/:id', (req, res) => {
-	model.Student.findById(req.params.id)
+	models.Student.findById(req.params.id)
 	.then(student => {
 		res.render('student-edit', {student});
+	})
+	.catch(err => {
+		if (err) throw err;
 	});
 });
 
@@ -46,9 +52,12 @@ router.post('/edit/:id', (req, res) => {
 	const condition = {
 		where: {id: req.params.id}
 	};
-	model.Student.update(newValues, condition)
+	models.Student.update(newValues, condition)
 	.then(() => {
 		res.redirect('/students');
+	})
+	.catch(err => {
+		if (err) throw err;
 	});
 });
 
@@ -56,9 +65,50 @@ router.get('/delete/:id', (req, res) => {
 	const condition = {
 		where: {id: req.params.id}
 	};
-	model.Student.destroy(condition)
+
+	models.Student.destroy(condition)
 	.then(() => {
 		res.redirect('/students');
+	})
+	.catch(err => {
+		if (err) throw err;
+	});
+});
+
+router.get('/:id/addsubject', (req, res) => {
+	const condition = {
+		where: {id: req.params.id}
+	};
+
+	Promise.all([models.Student.findById(req.params.id), models.Subject.findAll()])
+	.then(values => {
+		const data = {
+			student: values[0],
+			subjects: values[1]
+		}
+
+		res.render('student-add-subject', {data});
+	})
+	.catch(err => {
+		if (err) throw err;
+	});
+});
+
+router.post('/:id/addsubject', (req, res) => {
+	const values = {
+		StudentId: req.params.id,
+		SubjectId: req.body.SubjectId,
+		score: null,
+		updatedAt: new Date(),
+		createdAt: new Date()
+	}
+
+	models.StudentSubject.create(values)
+	.then(() => {
+		res.redirect('/students');
+	})
+	.catch(err => {
+		console.log(JSON.stringify(err, null, 4));
 	});
 });
 

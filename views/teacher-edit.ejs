@@ -1,0 +1,30 @@
+<%- include('templates/header.ejs') %>
+<div>
+	<form action = "/teachers/edit/<%= data.teacher.id %>" method = "POST">
+		First Name:
+		<br>
+		<input type = "text" name = "first_name" value = "<%=data.teacher.first_name%>" autofocus required>
+		<br>
+		Last Name:
+		<br>
+		<input type = "text" name = "last_name" value = "<%=data.teacher.last_name%>" required>
+		<br>
+		Email:
+		<br>
+		<input type = "text" name = "email" value = "<%=data.teacher.email%>" required>
+		<br>
+		<select name = "SubjectId">
+			<%data.subjects.forEach(subject => {%>
+			<%if (subject.id === data.teacher.SubjectId) {%>
+			<option value = "<%=subject.id%>" selected><%= subject.subject_name%></option>
+			<%} else {%>
+			<option value = "<%=subject.id%>"><%= subject.subject_name%></option>
+			<%}%>
+			<%})%>
+		</select>
+		<br>
+		<br>
+		<input type = "submit" value = "Edit Teachers">
+	</form>
+</div>
+<%- include('templates/footer.ejs') %>

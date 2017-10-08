@@ -1,0 +1,29 @@
+<%- include('templates/header.ejs') %>
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th>No</th>
+				<th>Name</th>
+				<th>Score</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%subject.StudentSubjects.forEach((studentSubject, idx) => {%>
+			<tr>
+				<td><%= idx + 1 %></td>
+				<td><%= studentSubject.Student.getFullName() %></td>
+				<%if (studentSubject.score) {%>
+					<td><%= studentSubject.score %></td>
+				<%} else {%>
+					<td>
+						<a href="/subjects/<%= studentSubject.id %>/givescore">Give Score</a>
+					</td>
+				<%}%>
+			</tr>
+			<%})%>
+		</tbody>
+	</table>
+</div>
+
+<%- include('templates/footer.ejs') %>
