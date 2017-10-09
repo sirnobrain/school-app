@@ -1,28 +1,46 @@
-body {
-	font-family: helvetica;
+#tagline {
+	padding: 32px 64px;
+	width: 62%;
+}
+#tagline h1 {
+	font-weight: 200;
 }
 
-table {
-	border-collapse: separate;
-	border-spacing: 8px;
-	text-align: left;
-	min-width: 45%;
+#tagline p {
+	font-size: 1.4em;
+	font-weight: 200;
 }
 
-th {
-	font-weight: 100;
+.nav-wrapper {
+	padding: 0 64px;
 }
 
-td {
-	border: 1px solid #222;
-	border-radius: 2px;
-	padding: 6px 18px;
+.login-form-container {
+	width: 32%;
+	margin: 64px auto;
 }
 
-th:last-child {
+.form-container {
+	width: 32%;
+	margin: 32px auto;
+}
+
+.table-container {
+	padding: 32px 64px;
+}
+
+.add-subject-table-container {
+	width: 32%;
+	margin: 32px auto;
+}
+
+.add {
+	margin-top: 32px;
+}
+
+.err {
+	color: red;
+	width: 100%;
+	display: block;
 	text-align: center;
-}
-
-div {
-	padding: 32px 32px;
 }

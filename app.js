@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
+const setMenubar = require('./helpers/setMenubar');
 
 const index = require('./routes/index');
 const teachers = require('./routes/teachers');
@@ -21,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(session(sessionSettings));
+app.use(setMenubar);
 
 app.use(express.static(path.join(__dirname, 'public')));
 

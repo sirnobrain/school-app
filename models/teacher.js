@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
                     const error = {
                         message: 'Validation Error: Email is already used'
                     }
-                    Teacher.find(condition)
+                    Teacher.findOne(condition)
                     .then(teacher => {
                         if(teacher) next(error)
                         next();

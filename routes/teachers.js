@@ -6,6 +6,7 @@ const checkAccessToTeachers = require('./../helpers/checkAccessToTeachers');
 router.use(checkAccessToTeachers);
 
 router.get('/', (req, res) => {
+	const menubar = req.menubar;
 	const condition = {
 		include: [{
 			model: models.Subject
@@ -14,7 +15,7 @@ router.get('/', (req, res) => {
 
 	models.Teacher.findAll(condition)
 	.then(teachers => {
-		res.render('teachers', {teachers});
+		res.render('teachers', {teachers, menubar});
 	})
 	.catch(err => {
 		if (err) throw err;
@@ -22,9 +23,10 @@ router.get('/', (req, res) => {
 });
 
 router.get('/add', (req, res) => {
+	const menubar = req.menubar;
 	models.Subject.findAll()
 	.then(subjects => {
-		res.render('teacher-add', {subjects});
+		res.render('teacher-add', {subjects, menubar});
 	})
 	.catch(err => {
 		if (err) throw err;
@@ -32,6 +34,7 @@ router.get('/add', (req, res) => {
 });
 
 router.post('/add', (req, res) => {
+	const menubar = req.menubar;
 	models.Teacher.create({
 		first_name: req.body.first_name,
 		last_name: req.body.last_name,
@@ -46,12 +49,13 @@ router.post('/add', (req, res) => {
 	.catch(err => {
 		models.Subject.findAll()
 		.then(subjects => {
-			res.render('teacher-add', {subjects, err});
+			res.render('teacher-add', {subjects, err, menubar});
 		});
 	});
 });
 
 router.get('/edit/:id', (req, res) => {
+	const menubar = req.menubar;
 	const condition = {
 		include: [{
 			model: models.Subject
@@ -63,7 +67,7 @@ router.get('/edit/:id', (req, res) => {
 			teacher: values[0],
 			subjects: values[1]
 		}
-		res.render('teacher-edit', {data});
+		res.render('teacher-edit', {data, menubar});
 	})
 	.catch(err => {
 		if (err) throw err;

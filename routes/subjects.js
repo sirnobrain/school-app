@@ -6,6 +6,7 @@ const checkAccessToSubjects = require('./../helpers/checkAccessToSubjects');
 router.use(checkAccessToSubjects);
 
 router.get('/', (req, res) => {
+	const menubar = req.menubar;
 	const condition = {
 		include: [{
 			model: models.Teacher
@@ -14,7 +15,7 @@ router.get('/', (req, res) => {
 
 	models.Subject.findAll(condition)
 	.then(subjects => {
-		res.render('subjects', {subjects});
+		res.render('subjects', {subjects, menubar});
 	})
 	.catch(err => {
 		if (err) throw err;
@@ -22,6 +23,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id/enrolledstudents', (req, res) => {
+	const menubar = req.menubar;
 	const condition = {
 		include: [
 			{
@@ -39,7 +41,7 @@ router.get('/:id/enrolledstudents', (req, res) => {
 
 	models.Subject.findById(req.params.id, condition)
 	.then(subject => {
-		res.render('subject-enrolled-students', {subject});
+		res.render('subject-enrolled-students', {subject, menubar});
 	})
 	.catch(err => {
 		if (err) throw err;
@@ -47,6 +49,7 @@ router.get('/:id/enrolledstudents', (req, res) => {
 });
 
 router.get('/:id/givescore', (req, res) => {
+	const menubar = req.menubar;
 	const condition = {
 		where: {
 			id: req.params.id
@@ -57,7 +60,7 @@ router.get('/:id/givescore', (req, res) => {
 
 	models.StudentSubject.findOne(condition)
 	.then(studentSubject => {
-		res.render('subject-give-score', {studentSubject});
+		res.render('subject-give-score', {studentSubject, menubar});
 	})
 	.catch(err => {
 		if (err) throw err;

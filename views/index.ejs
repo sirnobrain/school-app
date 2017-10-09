@@ -1,9 +1,31 @@
 <%- include('templates/header.ejs') %>
-	<ul>
-		<li><a href="/students">STUDENTS</a></li>
-		<li><a href="/subjects">SUBJECTS</a></li>
-		<li><a href="/teachers">TEACHERS</a></li>
-		<li><a href="/login">LOGIN</a></li>
-		<li><a href="/logout">LOG OUT</a></li>
-	</ul>
+<% 	if (hasOwnProperty('err')) { 
+	err.errors.forEach(error => { %>
+	<p class = "err"><%= error.message %></p>
+<% })} %>
+<% if (menubar.loggedIn) { %>
+	<div id = "tagline">
+		<h1>SELAMAT DATANG DI<br><b>STM PEMROGRAMAN</b></h1>
+		<p>Kami bertarung dengan otak, berpikir dengan dengkul, dan bermain dengan bahagia</p>
+	</div>
+<% } else { %>
+<div class = "login-form-container">
+	<form action = "/" method = "POST">
+		Username:
+		<input type="text" name="username">
+		<br>
+		Password:
+		<input type="password" name="password">
+		<br>
+		<select name="role">
+			<option value = "teacher">Teacher</option>
+			<option value = "academic">Academic</option>
+			<option value = "headmaster">Headmaster</option>
+		</select>
+		<br>
+		<br>
+		<input class="waves-effect waves-light btn" type = "submit" value = "Sign Up">
+	</form>
+</div>
+<% } %>
 <%- include('templates/footer.ejs') %>

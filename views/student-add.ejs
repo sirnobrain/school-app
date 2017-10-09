@@ -1,11 +1,11 @@
 <%- include('templates/header.ejs') %>
 
-<div>
+<div class = "form-container">
 	<%
 	if (hasOwnProperty('err')) {
 	err.errors.forEach(error => {
 	%>
-		<h1><%= error.message %></h1>
+		<p class = "err"><%= error.message %></p>
 	<%})}%>
 	<form action = "/students/add" method = "POST">
 		First Name:
@@ -21,7 +21,7 @@
 		<input type = "text" name = "email" required>
 		<br>
 		<br>
-		<input type = "submit" value = "Add Students">
+		<input class="waves-effect waves-light btn" type = "submit" value = "Add Students">
 	</form>
 </div>
 <%- include('templates/footer.ejs') %>

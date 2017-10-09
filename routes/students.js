@@ -6,9 +6,10 @@ const checkAccessToStudents = require('./../helpers/checkAccessToStudents');
 router.use(checkAccessToStudents);
 
 router.get('/', (req, res) => {
+	const menubar = req.menubar;
 	models.Student.findAll({order: [['id', 'asc']]})
 	.then(students => {
-		res.render('students', {students});
+		res.render('students', {students, menubar});
 	})
 	.catch(err => {
 		if (err) throw err;
@@ -16,10 +17,12 @@ router.get('/', (req, res) => {
 });
 
 router.get('/add', (req, res) => {
-	res.render('student-add');
+	const menubar = req.menubar;
+	res.render('student-add', {menubar});
 });
 
 router.post('/add', (req, res) => {
+	const menubar = req.menubar;
 	models.Student.create({
 		first_name: req.body.first_name, 
 		last_name: req.body.last_name, 
@@ -31,14 +34,15 @@ router.post('/add', (req, res) => {
 		res.redirect('/students');
 	})
 	.catch(err => {
-		res.render('student-add', {err})
+		res.render('student-add', {err, menubar})
 	});
 });
 
 router.get('/edit/:id', (req, res) => {
+	const menubar = req.menubar;
 	models.Student.findById(req.params.id)
 	.then(student => {
-		res.render('student-edit', {student});
+		res.render('student-edit', {student, menubar});
 	})
 	.catch(err => {
 		if (err) throw err;
@@ -79,6 +83,7 @@ router.get('/delete/:id', (req, res) => {
 });
 
 router.get('/:id/addsubject', (req, res) => {
+	const menubar = req.menubar;
 	const condition = {
 		where: {id: req.params.id}
 	};
@@ -90,7 +95,7 @@ router.get('/:id/addsubject', (req, res) => {
 			subjects: values[1]
 		}
 
-		res.render('student-add-subject', {data});
+		res.render('student-add-subject', {data, menubar});
 	})
 	.catch(err => {
 		if (err) throw err;

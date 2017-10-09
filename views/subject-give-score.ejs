@@ -1,6 +1,6 @@
 <%- include('templates/header.ejs') %>
 
-<div>
+<div class = "form-container">
 	<form action = "/subjects/<%= studentSubject.id %>/givescore" method = "POST">
 		Student: <%= studentSubject.Student.getFullName() %>
 		<br>
@@ -11,7 +11,7 @@
 		<input type = "hidden" name = "subject_id" value = "<%= studentSubject.Subject.id %>">
 		<br>
 		<br>
-		<input type = "submit" value = "Give Score">
+		<input class="waves-effect waves-light btn" type = "submit" value = "Give Score">
 	</form>
 </div>
 <%- include('templates/footer.ejs') %>

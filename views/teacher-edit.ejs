@@ -1,5 +1,5 @@
 <%- include('templates/header.ejs') %>
-<div>
+<div class = "form-container">
 	<form action = "/teachers/edit/<%= data.teacher.id %>" method = "POST">
 		First Name:
 		<br>
@@ -24,7 +24,7 @@
 		</select>
 		<br>
 		<br>
-		<input type = "submit" value = "Edit Teachers">
+		<input class="waves-effect waves-light btn" type = "submit" value = "Edit Teachers">
 	</form>
 </div>
 <%- include('templates/footer.ejs') %>

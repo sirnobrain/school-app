@@ -1,11 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>School</title>
+	<title>STM Pemrograman</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="/css/materialize.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
-<a href="/">Home</a>
-<a href="/students">Students</a>
-<a href="/subjects">Subjects</a>
-<a href="/teachers">Teachers</a>
+<div id = "main-navbar">
+	<ul id="dropdown1" class="dropdown-content">
+	  <li><a href="/students">List of Students</a></li>
+	  <li><a href="/students/add">Add Student</a></li>
+	</ul>
+
+	<ul id="dropdown2" class="dropdown-content">
+	  <li><a href="/teachers">List of Teachers</a></li>
+	  <li><a href="/teachers/add">Add Teacher</a></li>
+	</ul>
+
+	<nav>
+	  	<div class="nav-wrapper">
+	    	<a href="/" class="brand-logo">STM Pemrograman</a>
+	    	<ul class="right hide-on-med-and-down">
+	    	<% if (menubar.loggedIn) { %>
+	    		<% if (menubar.students) { %>
+	      		<li>
+	      			<a class="dropdown-button" href="/students" data-activates="dropdown1">
+	      				Students
+	      				<i class="material-icons right">arrow_drop_down</i>
+	      			</a>
+	      		</li>
+	      		<% } %>
+	      		<% if (menubar.teachers) { %>
+	      		<li>
+	      			<a class="dropdown-button" href="/teachers" data-activates="dropdown2">
+	      				Teachers
+	      				<i class="material-icons right">arrow_drop_down</i>
+	      			</a>
+	      		</li>
+	      		<% } %>
+	      		<% if (menubar.subjects) { %>
+	      		<li>
+	      			<a href="/subjects"> Subjects </a>
+	      		</li>
+	      		<% } %>
+	      		<li>
+	      			<a href="/logout">Log Out</a>
+	      		</li>
+	      		<% } else { %>
+	      		<li>
+	      			<a href="/login">Log In</a>
+	      		</li>
+	      	<% } %>
+	    	</ul>
+	  	</div>
+	</nav>
+</div>

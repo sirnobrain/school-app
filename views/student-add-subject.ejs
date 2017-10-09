@@ -1,6 +1,6 @@
 <%- include('templates/header.ejs') %>
 
-<div>
+<div class = "add-subject-table-container">
 	<table>
 		<tbody>
 			<tr>
@@ -17,8 +17,6 @@
 			</tr>
 		</tbody>
 	</table>
-</div>
-<div>
 	<form action = "/students/<%=data.student.id%>/addsubject" method = "POST">
 		<select name = "SubjectId">
 			<%data.subjects.forEach(subject => {%>
@@ -27,7 +25,7 @@
 		</select>
 		<br>
 		<br>
-		<input type = "submit" value = "Add Subject">
+		<input class="waves-effect waves-light btn" type = "submit" value = "Add Subject">
 	</form>
 </div>
 

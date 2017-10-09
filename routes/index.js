@@ -1,14 +1,46 @@
 const express = require('express');
+const crypto = require('crypto');
 const router = express.Router();
 const models = require('./../models');
+const randomSalt = require('./../helpers/randomSalt');
 
 router.get('/', (req, res) => {
-	console.log(req.session);
-	res.render('index');
+	const menubar = req.menubar;
+	res.render('index', {menubar});
+});
+
+router.post('/', (req, res) => {
+	const menubar = req.menubar;
+	const registerUser = (req, res) => {
+		const options = {
+			username: req.body.username,
+			password: req.body.password,
+			role: req.body.role,
+			salt: randomSalt(),
+			createdAt: new Date(),
+			updatedAt: new Date()
+		}
+		models.User.create(options)
+		.then(() => {
+			res.redirect('/login');
+		})
+		.catch(err => {
+			if (err.name === 'SequelizeValidationError') {
+				registerUser(req, res);
+			} else if (err.name === 'SequelizeUniqueConstraintError') {
+				res.render('index', {menubar, err});
+			} else {
+				throw err;	
+			}
+		});
+	}
+
+	registerUser(req, res);
 });
 
 router.get('/login', (req, res) => {
-	res.render('login');
+	const menubar = req.menubar;
+	res.render('login', {menubar});
 });
 
 router.post('/login', (req, res) => {
@@ -19,7 +51,10 @@ router.post('/login', (req, res) => {
 	}
 	models.User.findOne(options)
 	.then(user => {
-		if (user.password === req.body.password) {
+		const password = crypto.createHmac('sha256', user.salt)
+                        .update(req.body.password)
+                        .digest('hex');
+		if (user.password === password) {
 			// all clear, set session
 			const sessionUser = {
 				username: user.username,
