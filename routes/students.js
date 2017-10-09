@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const models = require('./../models');
+const checkAccessToStudents = require('./../helpers/checkAccessToStudents');
+
+router.use(checkAccessToStudents);
 
 router.get('/', (req, res) => {
 	models.Student.findAll({order: [['id', 'asc']]})

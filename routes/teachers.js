@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const models = require('./../models');
+const checkAccessToTeachers = require('./../helpers/checkAccessToTeachers');
+
+router.use(checkAccessToTeachers);
 
 router.get('/', (req, res) => {
 	const condition = {

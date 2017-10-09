@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const models = require('./../models');
+const checkAccessToSubjects = require('./../helpers/checkAccessToSubjects');
+
+router.use(checkAccessToSubjects);
 
 router.get('/', (req, res) => {
 	const condition = {
