@@ -5,7 +5,8 @@
 			<tr>
 				<th>No</th>
 				<th>Name</th>
-				<th>Score</th>
+				<th>Score By Number</th>
+				<th>Score By Letter</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -20,6 +21,7 @@
 						<a href="/subjects/<%= studentSubject.id %>/givescore">Give Score</a>
 					</td>
 				<%}%>
+				<td><%= studentSubject.getScoreLetter() %></td>
 			</tr>
 			<%})%>
 		</tbody>
